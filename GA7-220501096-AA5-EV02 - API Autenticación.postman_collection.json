@@ -1,0 +1,267 @@
+{
+  "info": {
+    "_postman_id": "0e0d8349-7bb5-4867-8744-3c1035931156",
+    "name": "GA7-220501096-AA5-EV02 - API Autenticación",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "16888653",
+    "_collection_link": "https://go.postman.co/collection/16888653-0e0d8349-7bb5-4867-8744-3c1035931156?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Verificar API",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Estado HTTP 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"La API está disponible\", function () {\r\n    const respuesta = pm.response.json();\r\n\r\n    pm.expect(respuesta.estado)\r\n        .to.eql(\"API disponible\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/auth",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "auth"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Registro correcto",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              " "
+            ]
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const numero = Date.now()\r\n    .toString()\r\n    .slice(-7);\r\n\r\npm.collectionVariables.set(\r\n    \"usuarioPrueba\",\r\n    `usuario${numero}`\r\n);\r\n\r\npm.collectionVariables.set(\r\n    \"passwordPrueba\",\r\n    \"Clave1234\"\r\n);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"usuario\": \"{{usuarioPrueba}}\",\r\n  \"password\": \"{{passwordPrueba}}\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/auth/registro",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "auth",
+            "registro"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Registro duplicado",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const numero = Date.now()\r\n    .toString()\r\n    .slice(-7);\r\n\r\npm.collectionVariables.set(\r\n    \"usuarioPrueba\",\r\n    `usuario${numero}`\r\n);\r\n\r\npm.collectionVariables.set(\r\n    \"passwordPrueba\",\r\n    \"Clave1234\"\r\n);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"usuario\": \"{{usuarioPrueba}}\",\r\n  \"password\": \"{{passwordPrueba}}\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/auth/registro",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "auth",
+            "registro"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login correcto",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Estado HTTP 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Autenticación satisfactoria\", function () {\r\n    const respuesta = pm.response.json();\r\n\r\n    pm.expect(respuesta.mensaje)\r\n        .to.eql(\"Autenticación satisfactoria.\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"usuario\": \"{{usuarioPrueba}}\",\r\n  \"password\": \"{{passwordPrueba}}\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/auth/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login incorrecto",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Estado HTTP 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Autenticación satisfactoria\", function () {\r\n    const respuesta = pm.response.json();\r\n\r\n    pm.expect(respuesta.mensaje)\r\n        .to.eql(\"Autenticación satisfactoria.\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"usuario\": \"{{usuarioPrueba}}\",\r\n  \"password\": \"Incorrecta123\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/auth/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Validación usuario vacío",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"usuario\": \"\",\r\n  \"password\": \"Clave1234\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/auth/registro",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "auth",
+            "registro"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Validación contraseña corta",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": ""
+    },
+    {
+      "key": "usuarioPrueba",
+      "value": ""
+    },
+    {
+      "key": "passwordPrueba",
+      "value": ""
+    }
+  ]
+}
